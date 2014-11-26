@@ -2,14 +2,14 @@ Pieces = new Mongo.Collection("pieces");
 Slots = new Mongo.Collection("slots");
 
 if (Meteor.isClient) {
-  var nextSlotFree = true;
   Template.body.helpers({
     pieces: function () {
-      return Pieces.find({next: { $ne: true}, position: -100 })
+      return Pieces.find({ next: { $ne: true}, position: -100 })
     },
     slots: function () {
-      return Slots.find({})
+      return Slots.find({}, { sort: { position: 1 }});
     }
+    
 
   });
   Template.next.helpers({
@@ -33,7 +33,7 @@ if (Meteor.isClient) {
         $('.piece').removeClass('dissabled');
         $('.free-slot').addClass('dissabled');
         if(didAnyoneWin(this.position)){
-          alert('hej');
+          alert('you won!');
         }
       }
     }
@@ -42,7 +42,6 @@ if (Meteor.isClient) {
     'click a.piece': function(e){
       e.preventDefault();
       if(isNextSlotFree()){
-        nextSlotFree = false;
         Pieces.update({_id: this._id}, {$set: {next: true}});
         $('.piece').addClass('dissabled');
         $('.free-slot').removeClass('dissabled');
@@ -94,6 +93,8 @@ function getCol(i){
 function getDiagonal(i){
   if(i%5 == 0){
     return [0,5,10,15];
+  } else if (i%3 == 0 && i != 0 && i != 15){
+    return [3,6,9,12];
   } else {
     return [];
   }
@@ -121,6 +122,10 @@ function didAnyoneWin(i){
         win_reverse = win_reverse&(15-pieces[j].key) 
       }
       if (win || win_reverse){
+        var slots = Slots.find({position: {$in: group}}).fetch();
+        for (j = 0; j < 4; j++){
+          Slots.update({ _id: slots[j]._id }, { $set: { winning_group: true } });  
+        }
         return true;
       }
     }

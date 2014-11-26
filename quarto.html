@@ -3,40 +3,56 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <div>
+    <div class="game">
+      <h2>Pieces left</h2>
+      <div class="remaining">
+        {{#each pieces}}
+          {{> piece}}
+        {{/each}}
+      </div>
 
-  <h2>Pieces left</h2>
-  <div class="remaining">
-    {{#each pieces}}
-      {{> piece}}
-    {{/each}}
-  </div>
+      <h2>Next</h2>
+      
+      <div class="board-area">
+        <div class="board-container">
+          <div class="next-piece">
+            <div class="slot">
+              {{> next}}
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <h2>Next</h2>
-  
-  <div class="board-area">
-    <div class="board-container">
-      <div class="next-piece">
-        <div class="slot">
-          {{> next}}
+      <h2>Board</h2>
+
+      <div class="board-area">
+        <div class="board-container">
+          <div class="board">
+            {{#each slots}}
+              {{> slot}}
+            {{/each}}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <h2>Board</h2>
-
-  <div class="board-area">
-    <div class="board-container">
-      <div class="board">
-        {{#each slots}}
-          {{> slot}}
+    <div class="message">
+      <ul>
+        {{#each messages}}
+          {{> message}}
         {{/each}}
-      </div>
+      </ul>
+      <textarea id="message"></textarea>
+      <button value="post" id="send">Post</button>
     </div>
   </div>
 </body>
 
+<template name="message">
+  <li>
+    {{text}}
+  </li>
+</template>
 <template name="next">
   {{#if next}}
     <span class="next {{next.class}}" data-piece-id="{{next._id}}" data-value={{next.key}}></span>
@@ -45,7 +61,7 @@
 </template>
 
 <template name="slot">
-  <div class="slot">
+  <div class="slot {{#if winning_group}}winning{{/if}} ">
     {{#if piece }}
       <span class="{{piece.class}}" data-value={{piece.key}}></span>
     {{ else }}

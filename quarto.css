@@ -22,6 +22,19 @@
 
 }
 
+.game {
+  width: 80%;
+  display: inline-block;
+}
+.message {
+  width: 19%;
+  display: inline-block;
+}
+
+.slot.winning {
+  outline: #00FF00 dotted thick;
+}
+
 .board {
   background: #ddd;
   width: 212px;
