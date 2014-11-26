@@ -1,0 +1,47 @@
+/* CSS declarations go here */
+
+
+.piece {
+  display: inline-block;
+  border: 20px solid black;
+  border-radius: 20px;
+}
+.next-piece {background: black;}
+
+.tall { border-top-color: red; }
+.short { border-top-color: blue;  }
+.light { border-right-color: red; }
+.dark { border-right-color: blue; }
+.round { border-bottom-color: red; }
+.square { border-bottom-color: blue; }
+.flat { border-left-color: red; }
+.hole { border-left-color: blue; }
+
+.dissabled {
+  cursor: default;
+
+}
+
+.board {
+  background: #ddd;
+  width: 212px;
+}
+.board-area {
+  text-align: center;
+}
+.board-container {
+  display: inline-block;
+}
+.slot {
+  border-radius: 20px;
+  background: white;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  display: inline-block;
+}
+.free-slot {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+}

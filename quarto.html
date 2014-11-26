@@ -1,0 +1,61 @@
+<head>
+  <title>quarto</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+
+  <h2>Pieces left</h2>
+  <div class="remaining">
+    {{#each pieces}}
+      {{> piece}}
+    {{/each}}
+  </div>
+
+  <h2>Next</h2>
+  
+  <div class="board-area">
+    <div class="board-container">
+      <div class="next-piece">
+        <div class="slot">
+          {{> next}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Board</h2>
+
+  <div class="board-area">
+    <div class="board-container">
+      <div class="board">
+        {{#each slots}}
+          {{> slot}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</body>
+
+<template name="next">
+  {{#if next}}
+    <span class="next {{next.class}}" data-piece-id="{{next._id}}" data-value={{next.key}}></span>
+  {{/if}}
+  
+</template>
+
+<template name="slot">
+  <div class="slot">
+    {{#if piece }}
+      <span class="{{piece.class}}" data-value={{piece.key}}></span>
+    {{ else }}
+      <a href="#" data-position={{position}} class="free-slot"></a>
+    {{/if}}
+    
+  </div>
+</template>
+
+
+<template name="piece">
+  <a href="#" id="{{_id}}" class="{{class}}" data-value={{key}}></a>
+</template>
