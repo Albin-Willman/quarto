@@ -37,20 +37,24 @@
       </div>
     </div>
     <div class="message">
-      <ul>
+      <ul class="message-list">
         {{#each messages}}
           {{> message}}
         {{/each}}
       </ul>
       <textarea id="message"></textarea>
       <button value="post" id="send">Post</button>
+      <div>
+        <label for="player_name">Name</label>
+        <input type="text" id="player_name">
+      </div>
     </div>
   </div>
 </body>
 
 <template name="message">
   <li>
-    {{text}}
+    <strong>{{author}}:</strong> {{text}}
   </li>
 </template>
 <template name="next">

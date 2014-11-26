@@ -3,13 +3,15 @@ Messages = new Mongo.Collection("messages");
 if (Meteor.isClient) {
   Template.body.helpers({
     messages: function () {
-      return Messages.find({}, { sort: { time: 1 } });
+      var messages = Messages.find({}, { sort: { time: -1 } } ).fetch();
+      return messages.slice(0,20);
     }
   });
   Template.body.events ({
     'click #send': function (e){
       var message = $("#message").val();
-      Messages.insert({text: message, time: Date.now() });
+      var name = $("#player_name").val();
+      Messages.insert({text: message, author: name, time: Date.now() });
       $("#message").val('');
     }
     
