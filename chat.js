@@ -4,7 +4,7 @@ if (Meteor.isClient) {
   Template.body.helpers({
     messages: function () {
       var messages = Messages.find({}, { sort: { time: -1 } } ).fetch();
-      return messages.slice(0,20);
+      return messages.slice(0,20).reverse();;
     }
   });
   Template.body.events ({

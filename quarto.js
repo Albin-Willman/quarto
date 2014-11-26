@@ -23,6 +23,15 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.body.events ({
+    'click #send': function (e){
+      var message = $("#message").val();
+      var name = $("#player_name").val();
+      Messages.insert({text: message, author: name, time: Date.now() });
+      $("#message").val('');
+    }
+  });
+
 
   Template.slot.events ({
     'click a.free-slot': function (e){
@@ -33,6 +42,7 @@ if (Meteor.isClient) {
         $('.piece').removeClass('dissabled');
         $('.free-slot').addClass('dissabled');
         if(didAnyoneWin(this.position)){
+          $('.restart').show();
           alert('you won!');
         }
       }
@@ -56,20 +66,26 @@ if (Meteor.isClient) {
 
 }
 
-function setupNewBoard() {
-  Pieces.remove({});
+
+
+if (Meteor.isServer) {
+  Meteor.startup(function () {
+    setupNewBoard();
+    Meteor.methods({
+      newGame: function() {
+        setupNewBoard();
+      }
+    })
+    // code to run on server at startup
+  });
+  setupNewBoard = function() {
+    Pieces.remove({});
     Slots.remove({});
     for(i = 0; i < 16; i++){
       Pieces.insert({key: i, position: -100, class: pieceClass(i), next: false })
       Slots.insert({position: i});
     }
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    setupNewBoard();
-    // code to run on server at startup
-  });
+  }
 }
 
 function getRow(i){
@@ -129,7 +145,6 @@ function didAnyoneWin(i){
         return true;
       }
     }
-
   }
   return false;
 }

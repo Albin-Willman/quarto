@@ -58,7 +58,9 @@
   height: 50px;
   display: inline-block;
 }
-
+.restart {
+  display: none;
+}
 
 .message-list {
   list-style: none;
