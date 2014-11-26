@@ -57,14 +57,18 @@ if (Meteor.isClient) {
 
 }
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    Pieces.remove({});
+function setupNewBoard() {
+  Pieces.remove({});
     Slots.remove({});
     for(i = 0; i < 16; i++){
       Pieces.insert({key: i, position: -100, class: pieceClass(i), next: false })
       Slots.insert({position: i});
     }
+}
+
+if (Meteor.isServer) {
+  Meteor.startup(function () {
+    setupNewBoard();
     // code to run on server at startup
   });
 }
