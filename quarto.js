@@ -14,7 +14,7 @@ if (Meteor.isClient) {
   });
   Template.next.helpers({
     next: function() {
-      return Pieces.findOne({next: true})
+      return Pieces.findOne({ next: true })
     }
   });
   Template.slot.helpers ({
