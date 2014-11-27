@@ -63,6 +63,8 @@
 <template name="next">
   {{#if next}}
     <span class="next {{next.class}}" data-piece-id="{{next._id}}" data-value={{next.key}}></span>
+  {{ else }}
+    <span class="piece"></span>
   {{/if}}
   
 </template>

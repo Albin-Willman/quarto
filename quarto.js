@@ -62,11 +62,7 @@ if (Meteor.isClient) {
   function isNextSlotFree(){
     return $('.next').length == 0;
   }
-
-
 }
-
-
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
@@ -83,45 +79,9 @@ if (Meteor.isServer) {
     Slots.remove({});
     for(i = 0; i < 16; i++){
       Pieces.insert({key: i, position: -100, class: pieceClass(i), next: false })
-      Slots.insert({position: i});
+      Slots.insert({ position: i });
     }
   }
-}
-
-function getRow(i){
-  var base = i - (i%4);
-  var row = [base];
-  for (j = 1; j < 4; j++){
-    row.push(base + j);
-  }
-  return row;
-}
-
-function getCol(i){
-  var base = (i%4);
-  var col = [base];
-  for (j = 1; j < 4; j++){
-    col.push(base + 4*j);
-  }
-  return col;
-}
-
-function getDiagonal(i){
-  if(i%5 == 0){
-    return [0,5,10,15];
-  } else if (i%3 == 0 && i != 0 && i != 15){
-    return [3,6,9,12];
-  } else {
-    return [];
-  }
-}
-
-function getGroups(i){
-  var groups = [];
-  groups.push(getRow(i));
-  groups.push(getCol(i));
-  groups.push(getDiagonal(i));
-  return groups;
 }
 
 function didAnyoneWin(i){
