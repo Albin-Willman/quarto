@@ -23,16 +23,6 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.body.events ({
-    'click #send': function (e){
-      var message = $("#message").val();
-      var name = $("#player_name").val();
-      Messages.insert({text: message, author: name, time: Date.now() });
-      $("#message").val('');
-    }
-  });
-
-
   Template.slot.events ({
     'click a.free-slot': function (e){
       e.preventDefault();
@@ -67,6 +57,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     setupNewBoard();
+    Messages.remove({});
     Meteor.methods({
       newGame: function() {
         setupNewBoard();
@@ -111,7 +102,7 @@ function didAnyoneWin(i){
 
 function pieceClass(i){
   var classes = 'piece'
-  classes += ' ' +getAttributeClass(i,1,'tall', 'short');
+  classes += ' ' + getAttributeClass(i,1,'tall', 'short');
   classes += ' ' + getAttributeClass(i,2,'light', 'dark');
   classes += ' ' + getAttributeClass(i,4,'round', 'square');
   classes += ' ' + getAttributeClass(i,8,'flat', 'hole');
