@@ -100,6 +100,13 @@ function didAnyoneWin(i){
   return false;
 }
 
+var evalForAllPositions = function(functionName){
+  var res = {};
+  for(i = 0; i < 16; i++){
+    res[i] = eval(functionName+"(i)");
+  }
+}
+
 function pieceClass(i){
   var classes = 'piece'
   classes += ' ' + getAttributeClass(i,1,'tall', 'short');

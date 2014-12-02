@@ -16,7 +16,7 @@ suite('Slots', function () {
         assert.equal(positions[slot.position], null);
         positions[slot.position] = true;
       }
-      
+
       done();
     });
 

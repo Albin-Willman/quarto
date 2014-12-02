@@ -42,3 +42,18 @@ brew install mongodb
 sudo mkdir -p /data/db/
 sudo chown `id -u` /data/db
 ```
+
+
+### Run tests
+
+Start a mongodb server
+
+```bash
+mongod
+```
+
+Run tests
+
+```bash
+laika
+```
