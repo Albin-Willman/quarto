@@ -1,0 +1,29 @@
+.slot.winning {
+  outline: #00FF00 dotted thick;
+}
+
+.board {
+  background: #ddd;
+  width: 212px;
+}
+.board-area {
+  text-align: center;
+}
+.board-container {
+  display: inline-block;
+}
+.slot {
+  border-radius: 20px;
+  background: white;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  display: inline-block;
+}
+.free-slot {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+
+.next-piece {background: black;}

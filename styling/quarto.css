@@ -7,22 +7,6 @@
   display: inline-block;
 }
 
-.piece {
-  display: inline-block;
-  border: 20px solid white;
-  border-radius: 20px;
-}
-.next-piece {background: black;}
-
-.tall { border-top-color: red; }
-.short { border-top-color: blue;  }
-.light { border-right-color: red; }
-.dark { border-right-color: blue; }
-.round { border-bottom-color: red; }
-.square { border-bottom-color: blue; }
-.flat { border-left-color: red; }
-.hole { border-left-color: blue; }
-
 .dissabled {
   cursor: default;
 }
@@ -32,33 +16,7 @@
   display: inline-block;
 }
 
-.slot.winning {
-  outline: #00FF00 dotted thick;
-}
 
-.board {
-  background: #ddd;
-  width: 212px;
-}
-.board-area {
-  text-align: center;
-}
-.board-container {
-  display: inline-block;
-}
-.slot {
-  border-radius: 20px;
-  background: white;
-  width: 40px;
-  height: 40px;
-  margin: 5px;
-  display: inline-block;
-}
-.free-slot {
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-}
 .restart {
   display: none;
 }

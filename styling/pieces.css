@@ -1,0 +1,13 @@
+.piece {
+  display: inline-block;
+  border: 20px solid white;
+  border-radius: 20px;
+}
+.tall { border-top-color: red; }
+.short { border-top-color: blue;  }
+.light { border-right-color: red; }
+.dark { border-right-color: blue; }
+.round { border-bottom-color: red; }
+.square { border-bottom-color: blue; }
+.flat { border-left-color: red; }
+.hole { border-left-color: blue; }
