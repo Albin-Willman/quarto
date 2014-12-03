@@ -25,15 +25,13 @@ if (Meteor.isClient) {
     'click a.free-slot': function (e){
       e.preventDefault();
       var position =this.position;
-      Meteor.call('setPiece', position, getPlayerName(), function(error, selected){
-        if(selected){
+      Meteor.call('setPiece', position, getPlayerName(), function(error, data){
+        if(data.status){
           $('.piece').removeClass('dissabled');
           $('.free-slot').addClass('dissabled');
-          if(didAnyoneWin(position)){
+          if(data.win){
             $('.restart').show();
-            Meteor.call('win', getPlayerName(), function(error, win) {
-              alert('you won!');  
-            }); 
+            alert('you won!');  
           }
         }
       });
@@ -74,12 +72,17 @@ if (Meteor.isServer) {
     },
     setPiece: function(position, player){
       next = findNextPiece();
+      ret = { status: false, win: false }
       if (next !== undefined){
         Pieces.update({_id: next._id}, {$set: {next: false, position: position}});
         printSystemMessage(player, 'Placed a piece.');
-        return true;
+        ret.status = true;
+        if (didAnyoneWin(position)){
+          ret.win = true;
+          printSystemMessage(player, 'Won!!!!');
+        }
       }
-      return false;
+      return ret;
     },
     newGame: function() {
       setupNewBoard();
@@ -105,31 +108,31 @@ if (Meteor.isServer) {
       Slots.insert({ position: i });
     }
   }
-}
 
-function didAnyoneWin(i){
-  var groups = getGroups(i);
-  var l = groups.length;
-  for (i = 0; i < l; i++){
-    var group = groups[i];
-    var pieces = Pieces.find({position: {$in: group}}).fetch();
-    if(pieces.length == 4){
-      var win = 15;
-      var win_reverse = 15;
-      for (j = 0; j < 4; j++){
-        win = win&pieces[j].key;
-        win_reverse = win_reverse&(15-pieces[j].key) 
-      }
-      if (win || win_reverse){
-        var slots = Slots.find({position: {$in: group}}).fetch();
+  function didAnyoneWin(i){
+    var groups = getGroups(i);
+    var l = groups.length;
+    for (i = 0; i < l; i++){
+      var group = groups[i];
+      var pieces = Pieces.find({position: {$in: group}}).fetch();
+      if(pieces.length == 4){
+        var win = 15;
+        var win_reverse = 15;
         for (j = 0; j < 4; j++){
-          Slots.update({ _id: slots[j]._id }, { $set: { winning_group: true } });  
+          win = win&pieces[j].key;
+          win_reverse = win_reverse&(15-pieces[j].key) 
         }
-        return true;
+        if (win || win_reverse){
+          var slots = Slots.find({position: {$in: group}}).fetch();
+          for (j = 0; j < 4; j++){
+            Slots.update({ _id: slots[j]._id }, { $set: { winning_group: true } });  
+          }
+          return true;
+        }
       }
     }
-  }
-  return false;
+    return false;
+  } 
 }
 
 function pieceClass(i){
