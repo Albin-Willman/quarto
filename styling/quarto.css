@@ -1,25 +1,18 @@
 /* CSS declarations go here */
-.system-message {
-  color: red;
-}
+.system-message { color: red; }
 .message {
   width: 19%;
   display: inline-block;
 }
 
-.dissabled {
-  cursor: default;
-}
+.dissabled { cursor: default; }
 
 .game {
   width: 80%;
   display: inline-block;
 }
 
-
-.restart {
-  display: none;
-}
+.restart { display: none; }
 
 .message-list {
   list-style: none;
