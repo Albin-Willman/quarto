@@ -1,0 +1,9 @@
+<template name="slot">
+  <div class="slot {{#if winning_group}}winning{{/if}} ">
+    {{#if piece }}
+      <span class="{{piece.class}}" data-value={{piece.key}}></span>
+    {{ else }}
+      <a href="#" data-position={{position}} class="free-slot"></a>
+    {{/if}}
+  </div>
+</template>

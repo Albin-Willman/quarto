@@ -9,8 +9,6 @@ if (Meteor.isClient) {
     slots: function () {
       return Slots.find({}, { sort: { position: 1 }});
     }
-    
-
   });
   Template.next.helpers({
     next: function() {
@@ -26,31 +24,33 @@ if (Meteor.isClient) {
   Template.slot.events ({
     'click a.free-slot': function (e){
       e.preventDefault();
-      $next = $('.next');
-      if ($next.length > 0){
-        Pieces.update({_id: $next.attr('data-piece-id')}, {$set: {next: false, position: this.position}});
-        $('.piece').removeClass('dissabled');
-        $('.free-slot').addClass('dissabled');
-        if(didAnyoneWin(this.position)){
-          $('.restart').show();
-          alert('you won!');
+      var position =this.position;
+      Meteor.call('setPiece', position, getPlayerName(), function(error, selected){
+        if(selected){
+          $('.piece').removeClass('dissabled');
+          $('.free-slot').addClass('dissabled');
+          if(didAnyoneWin(position)){
+            $('.restart').show();
+            alert('you won!');
+          }
         }
-      }
+      });
     }
   });
   Template.piece.events ({
     'click a.piece': function(e){
       e.preventDefault();
-      if(isNextSlotFree()){
-        Pieces.update({_id: this._id}, {$set: {next: true}});
-        $('.piece').addClass('dissabled');
-        $('.free-slot').removeClass('dissabled');
-      }
+      Meteor.call('selectNext', this._id, getPlayerName(), function(error, selected){
+        if(selected){
+          $('.piece').addClass('dissabled');
+          $('.free-slot').removeClass('dissabled');
+        }
+      });
     }
-  })
+  });
 
-  function isNextSlotFree(){
-    return $('.next').length == 0;
+  function getPlayerName(){
+    return $("#player_name").val();
   }
 }
 
@@ -65,6 +65,35 @@ if (Meteor.isServer) {
     })
     // code to run on server at startup
   });
+
+  Meteor.methods({
+    selectNext: function(pieceId, player){
+      if(findNextPiece() == undefined){
+        Pieces.update({_id: pieceId}, {$set: {next: true}});
+        printSystemMessage(player, 'Selected a piece.');
+        return true;
+      }
+      return false;
+    },
+    setPiece: function(position, player){
+      next = findNextPiece();
+      if (next !== undefined){
+        Pieces.update({_id: next._id}, {$set: {next: false, position: position}});
+        printSystemMessage(player, 'Placed a piece.');
+        return true;
+      }
+      return false;
+    }
+  });
+
+  printSystemMessage = function(player, message){
+    Messages.insert({text: message, author: player, systemMessage: true, time: Date.now() });
+  }
+
+  findNextPiece = function() {
+    return Pieces.findOne({ next: true })
+  }
+
   setupNewBoard = function() {
     Pieces.remove({});
     Slots.remove({});

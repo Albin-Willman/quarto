@@ -1,0 +1,11 @@
+<template name="message">
+  {{#if systemMessage}}
+    <li class="system-message">
+      <strong>{{author}}:</strong>{{text}}
+    </li>
+  {{ else }}
+    <li>
+      <strong>{{author}}:</strong>{{text}}
+    </li>
+  {{/if}}
+</template>

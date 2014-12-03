@@ -1,5 +1,11 @@
 /* CSS declarations go here */
-
+.system-message {
+  color: red;
+}
+.message {
+  width: 19%;
+  display: inline-block;
+}
 
 .piece {
   display: inline-block;
@@ -19,15 +25,10 @@
 
 .dissabled {
   cursor: default;
-
 }
 
 .game {
   width: 80%;
-  display: inline-block;
-}
-.message {
-  width: 19%;
   display: inline-block;
 }
 
