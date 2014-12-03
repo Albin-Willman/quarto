@@ -31,7 +31,9 @@ if (Meteor.isClient) {
           $('.free-slot').addClass('dissabled');
           if(didAnyoneWin(position)){
             $('.restart').show();
-            alert('you won!');
+            Meteor.call('win', getPlayerName(), function(error, win) {
+              alert('you won!');  
+            }); 
           }
         }
       });
@@ -58,11 +60,6 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     setupNewBoard();
     Messages.remove({});
-    Meteor.methods({
-      newGame: function() {
-        setupNewBoard();
-      }
-    })
     // code to run on server at startup
   });
 
@@ -83,6 +80,12 @@ if (Meteor.isServer) {
         return true;
       }
       return false;
+    },
+    newGame: function() {
+      setupNewBoard();
+    },
+    win: function(player) {
+      printSystemMessage(player, 'Won!!!!');
     }
   });
 
