@@ -1,0 +1,9 @@
+.system-message { color: red; }
+.message {
+  width: 19%;
+  display: inline-block;
+}
+.message-list {
+  list-style: none;
+  padding-left: 0;
+}

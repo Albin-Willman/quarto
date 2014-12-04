@@ -1,20 +1,7 @@
 /* CSS declarations go here */
-.system-message { color: red; }
-.message {
-  width: 19%;
-  display: inline-block;
-}
-
 .dissabled { cursor: default; }
-
+.restart { display: none; }
 .game {
   width: 80%;
   display: inline-block;
-}
-
-.restart { display: none; }
-
-.message-list {
-  list-style: none;
-  padding-left: 0;
 }

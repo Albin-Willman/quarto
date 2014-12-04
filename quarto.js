@@ -8,6 +8,9 @@ if (Meteor.isClient) {
     },
     slots: function () {
       return Slots.find({}, { sort: { position: 1 }});
+    },
+    board: function () {
+      return 'board';
     }
   });
   Template.next.helpers({
