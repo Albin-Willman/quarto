@@ -23,16 +23,11 @@ curl https://install.meteor.com/ | sh
 ### Test framework
 
 
-install laika for tests
+Add jasmine and velocity packages for tests
 
 ```bash
-sudo npm install -g laika
-```
-
-setup phantomjs dependency for laika
-
-```bash
-brew update && brew install phantomjs
+meteor add sanjo:jasmine
+meteor add velocity:html-reporter
 ```
 
 setup mongod server
@@ -41,19 +36,4 @@ setup mongod server
 brew install mongodb
 sudo mkdir -p /data/db/
 sudo chown `id -u` /data/db
-```
-
-
-### Run tests
-
-Start a mongodb server
-
-```bash
-mongod
-```
-
-Run tests
-
-```bash
-laika
 ```

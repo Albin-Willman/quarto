@@ -1,5 +1,4 @@
 Pieces = new Mongo.Collection("pieces");
-Slots = new Mongo.Collection("slots");
 
 if (Meteor.isClient) {
   Template.body.helpers({
@@ -104,8 +103,9 @@ if (Meteor.isServer) {
     Pieces.remove({});
     Slots.remove({});
     for(i = 0; i < 16; i++){
-      Pieces.insert({key: i, position: -100, class: pieceClass(i), next: false })
-      Slots.insert({ position: i });
+      Pieces.insert({key: i, position: -100, class: pieceClass(i), next: false });
+      var slot = new Slot(null, i);
+      slot.save();
     }
   }
 
