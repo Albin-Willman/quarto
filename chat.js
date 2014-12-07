@@ -1,5 +1,3 @@
-Messages = new Mongo.Collection("messages");
-
 if (Meteor.isClient) {
   Template.body.helpers({
     messages: function () {

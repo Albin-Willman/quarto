@@ -1,7 +1,7 @@
 "use strict";
 
 describe('Pieces', function() {
-  it("Should be created with a position", function(){
+  it("Should be created with a position, a key and a class", function(){
     spyOn(Pieces, "insert").and.callFake(function(doc, callback){
       callback(null, "1");
     });
