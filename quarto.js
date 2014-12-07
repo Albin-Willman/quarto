@@ -1,7 +1,7 @@
 if (Meteor.isClient) {
   Template.body.helpers({
     pieces: function () {
-      return Pieces.find({ next: { $ne: true}, position: -100 })
+      return Pieces.find({ position: null })
     },
     slots: function () {
       var slots = [];
@@ -13,7 +13,7 @@ if (Meteor.isClient) {
   });
   Template.next.helpers({
     next: function() {
-      return Pieces.findOne({ next: true })
+      return Pieces.findOne({ position: 'next' })
     }
   });
   Template.slot.helpers ({
@@ -65,7 +65,7 @@ if (Meteor.isServer) {
   Meteor.methods({
     selectNext: function(pieceId, player){
       if(findNextPiece() == undefined){
-        Pieces.update({_id: pieceId}, {$set: {next: true}});
+        Pieces.update({_id: pieceId}, {$set: {position: 'next'}});
         printSystemMessage(player, 'Selected a piece.');
         return true;
       }
@@ -80,17 +80,15 @@ if (Meteor.isServer) {
         ret.status = true;
         if (didAnyoneWin(position)){
           ret.win = true;
-          printSystemMessage(player, 'Won!!!!');
+          win(player);
         }
       }
       return ret;
     },
     newGame: function() {
       setupNewBoard();
-    },
-    win: function(player) {
-      printSystemMessage(player, 'Won!!!!');
     }
+    
   });
 
   printSystemMessage = function(player, message){
@@ -98,15 +96,18 @@ if (Meteor.isServer) {
   }
 
   findNextPiece = function() {
-    return Pieces.findOne({ next: true })
+    return Pieces.findOne({ position: "next" })
   }
 
   setupNewBoard = function() {
     Pieces.remove({});
     for(i = 0; i < 16; i++){
-      var piece = new Piece(null, i, -100, false);
+      var piece = new Piece(null, i, null);
       piece.save();
     }
+  }
+  function win(player) {
+    printSystemMessage(player, 'Won!!!!');
   }
 
   function didAnyoneWin(i){
