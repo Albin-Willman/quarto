@@ -1,5 +1,3 @@
-
-
 if (Meteor.isClient) {
   Template.body.helpers({
     pieces: function () {
@@ -106,7 +104,7 @@ if (Meteor.isServer) {
   setupNewBoard = function() {
     Pieces.remove({});
     for(i = 0; i < 16; i++){
-      var piece = new Piece(null, 0, -100, pieceClass(i), false);
+      var piece = new Piece(null, i, -100, false);
       piece.save();
     }
   }
@@ -135,20 +133,3 @@ if (Meteor.isServer) {
     return false;
   } 
 }
-
-function pieceClass(i){
-  var classes = 'piece'
-  classes += ' ' + getAttributeClass(i,1,'tall', 'short');
-  classes += ' ' + getAttributeClass(i,2,'light', 'dark');
-  classes += ' ' + getAttributeClass(i,4,'round', 'square');
-  classes += ' ' + getAttributeClass(i,8,'flat', 'hole');
-  return classes;
-}
-
-function getAttributeClass(i,m, posClas, negClass){
-  if(i&m){
-    return posClas;
-  } else {
-    return negClass;
-  }
-};
