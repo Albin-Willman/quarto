@@ -1,19 +1,22 @@
 "use strict";
 
-describe('Slots', function() {
+describe('Pieces', function() {
   it("Should be created with a position", function(){
-    spyOn(Slots, "insert").and.callFake(function(doc, callback){
+    spyOn(Pieces, "insert").and.callFake(function(doc, callback){
       callback(null, "1");
     });
 
-    var slot = new Slot(null, 1);
+    var piece = new Piece(null, 0, -100, 'test', false);
  
-    expect(slot.position).toBe(1);
+    expect(piece.key).toBe(0);
+    expect(piece.position).toBe(-100);
+    expect(piece.class).toBe('test');
+    expect(piece.next).toBe(false);
 
-    slot.save();
+    piece.save();
 
-    expect(slot.id).toEqual("1");
-    expect(Slots.insert).toHaveBeenCalledWith({position: 1}, jasmine.any(Function));
+    expect(piece.id).toEqual("1");
+    expect(Pieces.insert).toHaveBeenCalledWith({key: 0, position: -100, class: 'test', next: false}, jasmine.any(Function));
 
   });
 });

@@ -1,4 +1,4 @@
-Pieces = new Mongo.Collection("pieces");
+
 
 if (Meteor.isClient) {
   Template.body.helpers({
@@ -6,7 +6,11 @@ if (Meteor.isClient) {
       return Pieces.find({ next: { $ne: true}, position: -100 })
     },
     slots: function () {
-      return Slots.find({}, { sort: { position: 1 }});
+      var slots = [];
+      for (i = 0; i < 16; i++){
+        slots.push({position: i});
+      }
+      return slots;
     }
   });
   Template.next.helpers({
@@ -101,11 +105,9 @@ if (Meteor.isServer) {
 
   setupNewBoard = function() {
     Pieces.remove({});
-    Slots.remove({});
     for(i = 0; i < 16; i++){
-      Pieces.insert({key: i, position: -100, class: pieceClass(i), next: false });
-      var slot = new Slot(null, i);
-      slot.save();
+      var piece = new Piece(null, 0, -100, pieceClass(i), false);
+      piece.save();
     }
   }
 
@@ -123,9 +125,8 @@ if (Meteor.isServer) {
           win_reverse = win_reverse&(15-pieces[j].key) 
         }
         if (win || win_reverse){
-          var slots = Slots.find({position: {$in: group}}).fetch();
           for (j = 0; j < 4; j++){
-            Slots.update({ _id: slots[j]._id }, { $set: { winning_group: true } });  
+            Pieces.update({ _id: pieces[j]._id }, { $set: { winning_group: true } });    
           }
           return true;
         }

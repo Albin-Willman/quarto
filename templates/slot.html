@@ -1,5 +1,5 @@
 <template name="slot">
-  <div class="slot {{#if winning_group}}winning{{/if}} ">
+  <div class="slot {{#if piece.winning_group}}winning{{/if}} ">
     {{#if piece }}
       <span class="{{piece.class}}" data-value={{piece.key}}></span>
     {{ else }}
