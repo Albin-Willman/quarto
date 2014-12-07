@@ -9,7 +9,8 @@ if (Meteor.isClient) {
     'click #send': function (e){
       var message = $("#message").val();
       var name = $("#player_name").val();
-      Messages.insert({text: message, author: name, time: Date.now() });
+      var message = new Message(null, name, message, Date.now());
+      message.save();
       $("#message").val('');
     }
     

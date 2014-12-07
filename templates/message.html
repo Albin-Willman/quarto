@@ -1,11 +1,11 @@
 <template name="message">
-  {{#if systemMessage}}
+  {{#if system}}
     <li class="system-message">
-      <strong>{{author}}:</strong>{{text}}
+      <strong>{{player}}:</strong>{{message}}
     </li>
   {{ else }}
     <li>
-      <strong>{{author}}:</strong>{{text}}
+      <strong>{{player}}:</strong>{{message}}
     </li>
   {{/if}}
 </template>

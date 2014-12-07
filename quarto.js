@@ -92,7 +92,8 @@ if (Meteor.isServer) {
   });
 
   printSystemMessage = function(player, message){
-    Messages.insert({text: message, author: player, systemMessage: true, time: Date.now() });
+    var message = new Message(null, player, message, Date.now(), true);
+    message.save();
   }
 
   findNextPiece = function() {
