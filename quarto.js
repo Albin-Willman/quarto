@@ -31,7 +31,6 @@ if (Meteor.isServer) {
     newGame: function() {
       setupNewBoard();
     }
-    
   });
 
   printSystemMessage = function(player, message){
