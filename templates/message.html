@@ -1,11 +1,5 @@
 <template name="message">
-  {{#if system}}
-    <li class="system-message">
-      <strong>{{player}}:</strong>{{message}}
-    </li>
-  {{ else }}
-    <li>
-      <strong>{{player}}:</strong>{{message}}
-    </li>
-  {{/if}}
+  <li class="{{#if system}}system-message{{/if}}">
+    <strong>{{player}}:</strong>{{message}}
+  </li>
 </template>
