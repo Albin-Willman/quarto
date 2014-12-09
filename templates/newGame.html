@@ -1,0 +1,15 @@
+<template name="newGame">
+  {{#if currentGame}}
+    <div>
+      Game is running
+    </div>
+  {{ else }}
+    <div class="restart">
+      <button id="restart">New game</button>
+      <select name="ruleSet" id="ruleSet">
+        <option value="basic">basic</option>
+        <option value="advanced">advanced</option>
+      </select>
+    </div>
+  {{/if}}
+</template>

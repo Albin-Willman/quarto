@@ -1,6 +1,5 @@
 /* CSS declarations go here */
 .dissabled { cursor: default; }
-.restart { display: none; }
 .game {
   width: 80%;
   display: inline-block;

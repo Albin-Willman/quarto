@@ -1,6 +1,11 @@
 Template.body.events ({
   'click #restart': function (e){
     Meteor.call('newGame');
-    $('.restart').hide();
+  }
+});
+
+Template.body.helpers({
+  currentGame: function(){
+    return Game.findOne({ won: true });
   }
 });
