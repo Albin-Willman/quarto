@@ -41,9 +41,9 @@ sudo chown `id -u` /data/db
 
 ### TODO
 
-[ ] - meteor less files
-[ ] - groups for advanced rules
-[ ] - Set advanced or basic rules
-[ ] - Create game object that keeps track of turns and also for game history.
-[ ] - AI Api
-[ ] - Player object could be human or AI
+- [ ] meteor less files
+- [ ] groups for advanced rules
+- [ ] Set advanced or basic rules
+- [ ] Create game object that keeps track of turns and also for game history.
+- [ ] AI Api
+- [ ] Player object could be human or AI
