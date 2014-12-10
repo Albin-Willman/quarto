@@ -8,7 +8,10 @@ Meteor.methods({
 });
 
 setupNewGame = function(advanced) {
+  Pieces.remove({});
+  Games.remove({});
   if(!Meteor.call('currentGame')){
+    
     var game = new Game(null, advanced);
     game.save();
     for(i = 0; i < 16; i++){
