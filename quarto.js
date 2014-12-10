@@ -1,14 +1,17 @@
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    setupNewBoard();
+    setupNewGame();
     Messages.remove({});
     // code to run on server at startup
   });
 
   Meteor.methods({
     selectNext: function(pieceId, player){
+      
       if(findNextPiece() == undefined){
-        Pieces.update({_id: pieceId}, {$set: {position: 'next'}});
+        var piece = findPiece(pieceId);
+        piece.position = 'next';
+        piece.save();
         printSystemMessage(player, 'Selected a piece.');
         return true;
       }
@@ -18,7 +21,8 @@ if (Meteor.isServer) {
       next = findNextPiece();
       ret = { status: false, win: false }
       if (next !== undefined){
-        Pieces.update({_id: next._id}, {$set: {next: false, position: position}});
+        next.position = position;
+        next.save();
         printSystemMessage(player, 'Placed a piece.');
         ret.status = true;
         if (didAnyoneWin(position)){
@@ -27,9 +31,6 @@ if (Meteor.isServer) {
         }
       }
       return ret;
-    },
-    newGame: function() {
-      setupNewBoard();
     }
   });
 
@@ -37,17 +38,11 @@ if (Meteor.isServer) {
     var message = new Message(null, player, message, Date.now(), true);
     message.save();
   }
-
+  findPiece = function(id){
+    return Pieces.findOne({ _id: id })
+  }
   findNextPiece = function() {
     return Pieces.findOne({ position: "next" })
-  }
-
-  setupNewBoard = function() {
-    Pieces.remove({});
-    for(i = 0; i < 16; i++){
-      var piece = new Piece(null, i, null);
-      piece.save();
-    }
   }
   function win(player) {
     printSystemMessage(player, 'Won!!!!');
