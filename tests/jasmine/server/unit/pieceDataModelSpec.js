@@ -7,7 +7,7 @@ describe('Pieces', function() {
     });
 
     var piece = new Piece(null, 0, -100);
- 
+
     expect(piece.key).toBe(0);
     expect(piece.position).toBe(-100);
     expect(piece.class).toBe('piece short dark square hole');
@@ -15,7 +15,12 @@ describe('Pieces', function() {
     piece.save();
 
     expect(piece.id).toEqual("1");
-    expect(Pieces.insert).toHaveBeenCalledWith({key: 0, position: -100, class: 'piece short dark square hole'}, jasmine.any(Function));
+    expect(Pieces.insert).toHaveBeenCalledWith({
+        key: 0,
+        position: -100,
+        class: 'piece short dark square hole',
+        winning_group : undefined
+      }, jasmine.any(Function));
 
   });
 });

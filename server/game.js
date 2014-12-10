@@ -1,16 +1,19 @@
 Meteor.methods({
-  newGame: function() {
-    setupNewGame();
+  newGame: function(advanced) {
+    setupNewGame(advanced);
   },
   currentGame: function() {
-    
+    return Games.findOne({ won: false })
   }
 });
 
-setupNewGame = function() {
-  Pieces.remove({});
-  for(i = 0; i < 16; i++){
-    var piece = new Piece(null, i, null);
-    piece.save();
+setupNewGame = function(advanced) {
+  if(!Meteor.call('currentGame')){
+    var game = new Game(null, advanced);
+    game.save();
+    for(i = 0; i < 16; i++){
+      var piece = new Piece(null, i, null, game.id);
+      piece.save();
+    }
   }
 }
