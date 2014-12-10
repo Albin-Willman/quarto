@@ -6,10 +6,11 @@ describe('Pieces', function() {
       callback(null, "1");
     });
 
-    var piece = new Piece(null, 0, -100);
+    var piece = new Piece(null, 0, -100, 'game');
 
     expect(piece.key).toBe(0);
     expect(piece.position).toBe(-100);
+    expect(piece.game_id).toBe("game");
     expect(piece.class).toBe('piece short dark square hole');
 
     piece.save();
@@ -19,7 +20,8 @@ describe('Pieces', function() {
         key: 0,
         position: -100,
         class: 'piece short dark square hole',
-        winning_group : undefined
+        winning_group : undefined,
+        game_id: "game"
       }, jasmine.any(Function));
 
   });
