@@ -26,6 +26,38 @@ getDiagonal = function(i){
   }
 }
 
+getSubSquare = function(i){
+  var row = (i%3);
+  var col = (i/3) >> 0;
+  var square = [];
+  for (y = col ; y < col + 2 ; y++) {
+    for (x = row ; x < row + 2 ; x++){
+      square.push(x+4*y);
+    }
+  }
+  return square;
+}
+
+getSquares = function(i){
+  var size = 4;
+  var row = (i%size);
+  var col = (i/size) >> 0;
+  var squares = [];
+
+  for (yy = col - 1 ; yy < col + 1 ; yy++) {
+    if (yy == - 1 || yy == size - 1) {
+      continue;
+    }
+    for (xx = row - 1 ; xx < row + 1 ; xx++) {
+      if (xx == -1 || xx == size - 1) {
+        continue;
+      }
+      squares.push(getSubSquare((xx+3*yy)));
+    }
+  }
+  return squares;
+}
+
 getGroups = function(i){
   var groups = [];
   groups.push(getRow(i));
