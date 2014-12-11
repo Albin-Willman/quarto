@@ -64,10 +64,7 @@ getGroups = function(i, advanced){
   groups.push(getCol(i));
   groups.push(getDiagonal(i));
   if (advanced) {
-    var squares = getSquares(i)
-    for (var i = 0 ; i < squares.length ; i++) {
-      groups.push(squares[i]);
-    }
+    groups = groups.concat(getSquares(i));  
   }
   return groups;
 }
