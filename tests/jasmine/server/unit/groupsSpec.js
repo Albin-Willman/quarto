@@ -33,6 +33,10 @@ describe('Groups', function() {
       var expected = [cases[i].row, cases[i].col, cases[i].diag];
       expect(getGroups(i)).toEqual(expected);
     }
+    for(var i = 0; i < 16; i++){
+      var expected = [cases[i].row, cases[i].col, cases[i].diag].concat(cases[i].squares);
+      expect(getGroups(i,true)).toEqual(expected);
+    }
   });
 
   it('should return all squares for a position', function() {
