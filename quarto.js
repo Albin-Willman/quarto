@@ -7,7 +7,6 @@ if (Meteor.isServer) {
 
   Meteor.methods({
     selectNext: function(pieceId, player){
-      
       if(findNextPiece() == undefined){
         var piece = findPiece(pieceId);
         piece.position = 'next';
@@ -18,16 +17,16 @@ if (Meteor.isServer) {
       return false;
     },
     setPiece: function(position, player){
-      next = findNextPiece();
-      ret = { status: false, win: false }
+      var next = findNextPiece();
+      var ret = { status: false, win: false }
       if (next !== undefined){
         next.position = position;
         next.save();
         printSystemMessage(player, 'Placed a piece.');
         ret.status = true;
         if (didAnyoneWin(position)){
+          endCurrentGame(true);
           ret.win = true;
-          win(player);
         }
       }
       return ret;
@@ -39,17 +38,29 @@ if (Meteor.isServer) {
     message.save();
   }
   findPiece = function(id){
-    return Pieces.findOne({ _id: id })
+    return Pieces.findOne({ _id: id });
   }
   findNextPiece = function() {
-    return Pieces.findOne({ position: "next" })
+    return Pieces.findOne({ position: "next" });
   }
+
+  function endCurrentGame(win){
+    var game = Meteor.call('currentGame');
+    game.finnished = true;
+    game.save();
+    if( win ) {
+      win(player);
+    } else {
+
+    }
+  }
+
   function win(player) {
     printSystemMessage(player, 'Won!!!!');
   }
 
   function didAnyoneWin(i){
-    var groups = getGroups(i);
+    var groups = getGroups(i, false);
     var l = groups.length;
     for (i = 0; i < l; i++){
       var group = groups[i];
@@ -63,7 +74,8 @@ if (Meteor.isServer) {
         }
         if (win || win_reverse){
           for (j = 0; j < 4; j++){
-            Pieces.update({ _id: pieces[j]._id }, { $set: { winning_group: true } });    
+            pieces[j].winning_group = true;
+            pieces[j].save();
           }
           return true;
         }

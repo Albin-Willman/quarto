@@ -58,10 +58,16 @@ getSquares = function(i){
   return squares;
 }
 
-getGroups = function(i){
+getGroups = function(i, includeSquares){
   var groups = [];
   groups.push(getRow(i));
   groups.push(getCol(i));
   groups.push(getDiagonal(i));
+  if(includeSquares){
+    var squares = getSquares(i);
+    for (var j = 0; j < squares.length; j++){
+      groups.push(squares[i]) 
+    }
+  }
   return groups;
 }

@@ -15,11 +15,6 @@ Template.next.helpers({
     return Pieces.findOne({ position: 'next' })
   }
 });
-Template.slot.helpers ({
-  piece: function (){
-    return Pieces.findOne({position: this.position})
-  }
-});
 
 Template.slot.events ({
   'click a.free-slot': function (e){
