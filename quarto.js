@@ -55,7 +55,7 @@ if (Meteor.isServer) {
     if( victory ) {
       win(player);
     } else {
-      printSystemMessage(player, 'Placed the last piece and it is a tie.');  
+      printSystemMessage(player, 'Placed the last piece and it is a tie.');
     }
   }
 
@@ -74,7 +74,7 @@ if (Meteor.isServer) {
         var win_reverse = 15;
         for (j = 0; j < 4; j++){
           win = win&pieces[j].key;
-          win_reverse = win_reverse&(15-pieces[j].key) 
+          win_reverse = win_reverse&(15-pieces[j].key)
         }
         if (win || win_reverse){
           for (j = 0; j < 4; j++){
@@ -86,5 +86,5 @@ if (Meteor.isServer) {
       }
     }
     return false;
-  } 
+  }
 }
