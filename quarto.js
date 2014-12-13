@@ -64,7 +64,7 @@ if (Meteor.isServer) {
   }
 
   function didAnyoneWin(i, game){
-    var groups = getGroups(i, false);
+    var groups = getGroups(i, game.advanced);
     var l = groups.length;
     for (i = 0; i < l; i++){
       var group = groups[i];

@@ -1,5 +1,6 @@
 <template name="game">
   <div class="game">
+    Rules: {{#if advanced}}Advanced{{ else }}Basic{{/if}}
     <h2>Pieces left</h2>
     <div class="remaining">
       {{#each pieces}}

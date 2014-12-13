@@ -63,11 +63,8 @@ getGroups = function(i, includeSquares){
   groups.push(getRow(i));
   groups.push(getCol(i));
   groups.push(getDiagonal(i));
-  if(includeSquares){
-    var squares = getSquares(i);
-    for (var j = 0; j < squares.length; j++){
-      groups.push(squares[i]) 
-    }
+  if (includeSquares) {
+    groups = groups.concat(getSquares(i));  
   }
   return groups;
 }
