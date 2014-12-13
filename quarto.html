@@ -5,9 +5,15 @@
 <body>
   <div>
     {{> newGame}}
-    {{#each runnningGames}}
-      {{> game}}
-    {{/each}}
+    {{#if runnningGames.count }}
+      {{#each runnningGames}}
+        {{> game}}
+      {{/each}}
+    {{ else }}
+      {{#each lastGames}}
+        {{> game}}
+      {{/each}}
+    {{/if}}
     <div class="message">
       <ul class="message-list">
         {{#each messages}}

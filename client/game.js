@@ -1,6 +1,9 @@
 Template.body.helpers({
   runnningGames: function(){
     return Games.find({finnished: false});
+  },
+  lastGames: function(){
+    return Games.find({}, {sort: {created_at : -1}, limit: 1 });
   }
 });
 
