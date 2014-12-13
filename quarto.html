@@ -5,38 +5,9 @@
 <body>
   <div>
     {{> newGame}}
-    <div class="game">
-      <h2>Pieces left</h2>
-      <div class="remaining">
-        {{#each pieces}}
-          {{> piece}}
-        {{/each}}
-      </div>
-
-      <h2>Next</h2>
-      
-      <div class="board-area">
-        <div class="board-container">
-          <div class="next-piece">
-            <div class="slot">
-              {{> next}}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <h2>Board</h2>
-
-      <div class="board-area">
-        <div class="board-container">
-          <div class="board">
-            {{#each slots}}
-              {{> slot}}
-            {{/each}}
-          </div>
-        </div>
-      </div>
-    </div>
+    {{#each runnningGames}}
+      {{> game}}
+    {{/each}}
     <div class="message">
       <ul class="message-list">
         {{#each messages}}
