@@ -25,7 +25,7 @@ Added jasmine and velocity packages for tests
 
 ### TODO
 
-- [ ] meteor less files
+- [ ] meteor less files, maybe look at: http://www.manuel-schoebel.com/blog/meteorjs-and-twitter-bootstrap---the-right-way
 - [x] groups for advanced rules
 - [x] Set advanced or basic rules
 - [ ] Create game object that keeps track of turns and also for game history.
