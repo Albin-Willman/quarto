@@ -7,6 +7,10 @@ if (Meteor.isServer) {
   Meteor.methods({
     selectNext: function(pieceId, player){
       var game = currentGame();
+      if(game == undefined){
+        printSystemMessage(player, 'There is no game running.');
+        return false;
+      }
       if(findNextPiece(game.id) == undefined){
         var piece = findPiece(pieceId);
         piece.position = 'next';
@@ -18,8 +22,12 @@ if (Meteor.isServer) {
     },
     setPiece: function(position, player){
       var game = currentGame();
-      var next = findNextPiece(game.id);
       var ret = { status: false, win: false }
+      if(game == undefined){
+        printSystemMessage(player, 'There is no game running.');
+        return ret;
+      }
+      var next = findNextPiece(game.id);
       if (next !== undefined){
         next.position = position;
         next.save();
