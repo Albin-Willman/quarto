@@ -18,7 +18,7 @@ describe('Messages', function() {
     message.save();
 
     expect(message.id).toEqual("1");
-    expect(Messages.insert).toHaveBeenCalledWith({ message: "Message", player: "Name", time: 'right_now', system: false }, jasmine.any(Function));
+    expect(Messages.insert).toHaveBeenCalledWith({ message: "Message", player: "Name", created_at: 'right_now', system: false }, jasmine.any(Function));
 
   });
 

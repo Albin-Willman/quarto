@@ -1,6 +1,6 @@
 Template.body.helpers({
   messages: function () {
-    return Messages.find({}, { sort: { time: -1 }, limit: 20 } ).fetch().reverse();
+    return Messages.find({}, { sort: { created_at: -1 }, limit: 20 } ).fetch().reverse();
   }
 });
 Template.body.events ({
