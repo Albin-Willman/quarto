@@ -20,14 +20,15 @@ curl https://install.meteor.com/ | sh
 
 ### Test framework
 
-Add jasmine and velocity packages for tests
+Added jasmine and velocity packages for tests
 
 
 ### TODO
 
 - [ ] meteor less files
-- [ ] groups for advanced rules
-- [ ] Set advanced or basic rules
+- [x] groups for advanced rules
+- [x] Set advanced or basic rules
 - [ ] Create game object that keeps track of turns and also for game history.
 - [ ] AI Api
 - [ ] Player object could be human or AI
+- [ ] Introduce Session to keep track of players

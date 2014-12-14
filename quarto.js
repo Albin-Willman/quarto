@@ -46,7 +46,7 @@ if (Meteor.isServer) {
   });
 
   printSystemMessage = function(player, message){
-    var message = new Message(null, player, message, Date.now(), true);
+    var message = new Message(null, player, message, true);
     message.save();
   }
   findPiece = function(id){

@@ -5,6 +5,14 @@ describe('Games', function() {
     spyOn(Games, "insert").and.callFake(function(doc, callback){
       callback(null, "1");
     });
+    var piece_id = 1;
+    spyOn(Pieces, "insert").and.callFake(function(doc, callback){
+      callback(null, piece_id);
+      piece_id++;
+    });
+    spyOn(Date, "now").and.callFake(function(){
+      return "right_now";
+    });
 
     var game = new Game(null, false);
 
@@ -16,7 +24,20 @@ describe('Games', function() {
     game.save();
 
     expect(game.id).toEqual("1");
-    expect(Games.insert).toHaveBeenCalledWith({ advanced: false, player1: null, player2: null, finnished: false }, jasmine.any(Function));
+    expect(Games.insert).toHaveBeenCalledWith({ 
+      advanced: false, 
+      player1: null, 
+      player2: null, 
+      finnished: false,
+      created_at: 'right_now' }, jasmine.any(Function));
+    expect(Pieces.insert).toHaveBeenCalledWith({
+        key: 0,
+        position: null,
+        class: 'piece short dark square hole',
+        winning_group : undefined,
+        game_id: "1"
+      }, jasmine.any(Function));
+    expect(Pieces.insert.calls.count()).toBe(16);
 
   });
 

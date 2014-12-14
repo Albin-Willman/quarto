@@ -5,13 +5,10 @@ Meteor.methods({
 });
 
 setupNewGame = function(advanced) {
-  if(currentGame() == undefined){
+  if(currentGame() == undefined || true){
     var game = new Game(null, advanced);
     game.save();
-    game = currentGame();
-    for(i = 0; i < 16; i++){
-      var piece = new Piece(null, i, null, game.id);
-      piece.save();
-    }
+    return true;
   }
+  return false;
 }

@@ -1,7 +1,6 @@
 Template.body.helpers({
   messages: function () {
-    var messages = Messages.find({}, { sort: { time: -1 } } ).fetch();
-    return messages.slice(0,20).reverse();;
+    return Messages.find({}, { sort: { time: -1 }, limit: 20 } ).fetch().reverse();
   }
 });
 Template.body.events ({
@@ -9,7 +8,7 @@ Template.body.events ({
     var message = $("#message").val();
     if(message.length){
       var name = $("#player_name").val();
-      var message = new Message(null, name, message, Date.now());
+      var message = new Message(null, name, message);
       message.save();
       $("#message").val('');
     }
