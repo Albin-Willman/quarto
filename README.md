@@ -32,3 +32,6 @@ Added jasmine and velocity packages for tests
 - [ ] AI Api
 - [ ] Player object could be human or AI
 - [ ] Introduce Session to keep track of players
+- [ ] Introduce turns
+- [ ] Prompt player whos turn it is
+- [ ] View old games
