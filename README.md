@@ -2,13 +2,7 @@
 
 This is my quick take on the boardgame Quarto. The main purpose of this project is to learn more javascript in general and how meteor works in particular.
 
-
-## Usage
-
-run `meteor` from console and go to localhost:3000 and the game should be on.
-
-
-### Dependencies
+### Installation
 
 All installation instructions are for MacOs X.
 
@@ -17,6 +11,10 @@ All installation instructions are for MacOs X.
 ```bash
 curl https://install.meteor.com/ | sh
 ```
+
+### Usage
+
+run `meteor` from console and go to localhost:3000 and the game should be on.
 
 ### Test framework
 
@@ -31,7 +29,7 @@ Added jasmine and velocity packages for tests
 - [ ] Create game object that keeps track of turns and also for game history.
 - [ ] AI Api
 - [ ] Player object could be human or AI
-- [ ] Introduce Session to keep track of players
+- [ ] Introduce Sessions to keep track of players
 - [ ] Introduce turns
 - [ ] Prompt player whos turn it is
 - [ ] View old games
