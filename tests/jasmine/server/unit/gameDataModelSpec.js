@@ -40,5 +40,26 @@ describe('Games', function() {
     expect(Pieces.insert.calls.count()).toBe(16);
 
   });
+  
+  it('Should game should be able to find it`s pieces', function(){
+    spyOn(Games, "insert").and.callFake(function(doc, callback){
+      callback(null, "1");
+    });
+    var piece_id = 1;
+    spyOn(Pieces, "insert").and.callFake(function(doc, callback){
+      callback(null, piece_id);
+      piece_id++;
+    });
+    spyOn(Pieces, "find").and.callFake(function(doc, callback){
+      return {fetch: function(){}};
+    });
+
+
+    var game = new Game(null, false);
+    game.save();
+    game.pieces;
+    expect(Pieces.find).toHaveBeenCalledWith({game_id: "1"});
+
+  });
 
 });
