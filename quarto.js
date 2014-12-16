@@ -11,8 +11,8 @@ if (Meteor.isServer) {
         printSystemMessage(player, 'There is no game running.');
         return false;
       }
-      if(findNextPiece(game.id) == undefined){
-        var piece = findPiece(pieceId);
+      if(game.next === undefined){
+        var piece = game.piece(pieceId);
         piece.position = 'next';
         piece.save();
         printSystemMessage(player, 'Selected a piece.');
@@ -27,7 +27,7 @@ if (Meteor.isServer) {
         printSystemMessage(player, 'There is no game running.');
         return ret;
       }
-      var next = findNextPiece(game.id);
+      var next = game.next;
       if (next !== undefined){
         next.position = position;
         next.save();
@@ -48,12 +48,6 @@ if (Meteor.isServer) {
   printSystemMessage = function(player, message){
     var message = new Message(null, player, message, true);
     message.save();
-  }
-  findPiece = function(id){
-    return Pieces.findOne({ _id: id });
-  }
-  findNextPiece = function(game_id) {
-    return Pieces.findOne({ position: "next", game_id: game_id });
   }
 
   function endGame(victory, game, player){

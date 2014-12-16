@@ -9,12 +9,12 @@ Template.body.helpers({
 
 Template.game.helpers({
   pieces: function () {
-    return Pieces.find({ position: null, game_id: this.id });
+    return this.unusedPieces;
   },
   slots: function () {
     var slots = [];
     for (i = 0; i < 16; i++){
-      slots.push({position: i, piece: Pieces.findOne({position: i, game_id: this.id})});
+      slots.push({position: i, piece: this.pieceByPos(i)});
     }
     return slots;
   }

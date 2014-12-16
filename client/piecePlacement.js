@@ -1,15 +1,3 @@
-Template.body.helpers({
-  pieces: function () {
-    return Pieces.find({ position: null })
-  },
-  slots: function () {
-    var slots = [];
-    for (i = 0; i < 16; i++){
-      slots.push({position: i});
-    }
-    return slots;
-  }
-});
 Template.next.helpers({
   next: function() {
     return Pieces.findOne({ position: 'next' })
