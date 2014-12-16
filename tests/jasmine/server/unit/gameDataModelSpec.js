@@ -61,5 +61,44 @@ describe('Games', function() {
     expect(Pieces.find).toHaveBeenCalledWith({game_id: "1"});
 
   });
+  it('Should game should be able to find the piece', function(){
+    spyOn(Games, "insert").and.callFake(function(doc, callback){
+      callback(null, "1");
+    });
+    var piece_id = 1;
+    spyOn(Pieces, "insert").and.callFake(function(doc, callback){
+      callback(null, piece_id);
+      piece_id++;
+    });
+    spyOn(Pieces, "findOne").and.callFake(function(doc, callback){
+      return {fetch: function(){}};
+    });
+
+    var game = new Game(null, false);
+    game.save();
+    game.next;
+    expect(Pieces.findOne).toHaveBeenCalledWith({position: 'next', game_id: "1"});
+  });
+
+  it('Should game should be able to find it`s pieces', function(){
+    spyOn(Games, "insert").and.callFake(function(doc, callback){
+      callback(null, "1");
+    });
+    var piece_id = 1;
+    spyOn(Pieces, "insert").and.callFake(function(doc, callback){
+      callback(null, piece_id);
+      piece_id++;
+    });
+    spyOn(Pieces, "find").and.callFake(function(doc, callback){
+      return {fetch: function(){}};
+    });
+
+
+    var game = new Game(null, false);
+    game.save();
+    game.unusedPieces;
+    expect(Pieces.find).toHaveBeenCalledWith({position : null, game_id: "1"});
+
+  });
 
 });
