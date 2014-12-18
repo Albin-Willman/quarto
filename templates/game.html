@@ -1,6 +1,19 @@
 <template name="game">
   <div class="game">
+    <h2>Ruleset</h2>
     Rules: {{#if advanced}}Advanced{{ else }}Basic{{/if}}
+    <h2>Players</h2>
+    {{#if player1}}
+      player1 set
+    {{ else }}
+      player1 not set
+    {{/if}}
+    {{#if player2}}
+      player2 set
+    {{ else }}
+      player2 not set
+    {{/if}}
+    <h3>{{turnString}}</h3>
     <h2>Pieces left</h2>
     <div class="remaining">
       {{#each pieces}}
@@ -8,8 +21,9 @@
       {{/each}}
     </div>
 
+
     <h2>Next</h2>
-    
+
     <div class="board-area">
       <div class="board-container">
         <div class="next-piece">

@@ -10,16 +10,21 @@ describe('Game methods', function() {
       spyOn(Date, "now").and.callFake(function(){
         return "right_now";
       });
+      spyOn(Math, 'random').and.callFake(function(doc, callback){
+        return 1;
+      });
 
       Meteor.call('newGame', true);
-      expect(Games.insert).toHaveBeenCalledWith({ 
-        advanced: true, 
-        player1: null, 
-        player2: null, 
+      expect(Games.insert).toHaveBeenCalledWith({
+        advanced: true,
+        player1_id: null,
+        player2_id: null,
         finnished: false,
+        turn: 2,
         created_at: 'right_now' }, jasmine.any(Function));
 
     });
   });
+
 
 });

@@ -22,6 +22,9 @@ describe('Games', function() {
     spyOn(Pieces, "findOne").and.callFake(function(doc, callback){
       return {fetch: function(){}};
     });
+    spyOn(Math, 'random').and.callFake(function(doc, callback){
+      return 0;
+    });
     game = new Game(null, false);
   });
 
@@ -29,17 +32,18 @@ describe('Games', function() {
   it('Should be created with an advanced option, no players and finnished as false', function() {
     expect(game.advanced).toBe(false);
     expect(game.finnished).toBe(false);
-    expect(game.player1).toBe(null);
-    expect(game.player2).toBe(null);
+    expect(game.player1).toBe(undefined);
+    expect(game.player2).toBe(undefined);
 
     game.save();
 
     expect(game.id).toEqual("1");
-    expect(Games.insert).toHaveBeenCalledWith({ 
-      advanced: false, 
-      player1: null, 
-      player2: null, 
+    expect(Games.insert).toHaveBeenCalledWith({
+      advanced: false,
+      player1_id: null,
+      player2_id: null,
       finnished: false,
+      turn: 0,
       created_at: 'right_now' }, jasmine.any(Function));
     expect(Pieces.insert).toHaveBeenCalledWith({
         key: 0,
@@ -51,7 +55,7 @@ describe('Games', function() {
     expect(Pieces.insert.calls.count()).toBe(16);
 
   });
-  
+
   it('Should game should be able to find it`s pieces', function(){
     game.save();
     game.pieces;
