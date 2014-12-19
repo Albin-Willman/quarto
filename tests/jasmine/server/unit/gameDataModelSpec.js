@@ -1,5 +1,4 @@
 "use strict";
-
 describe('Games', function() {
   var piece_id;
   var game;

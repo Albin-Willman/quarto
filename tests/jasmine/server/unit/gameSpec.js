@@ -1,5 +1,4 @@
 "use strict";
-
 describe('Game methods', function() {
 
   describe('New game', function() {
