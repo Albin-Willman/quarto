@@ -1,13 +1,15 @@
-<div class="message">
-  <ul class="message-list">
-    {{#each messages}}
-      {{> message}}
-    {{/each}}
-  </ul>
-  <textarea id="message"></textarea>
-  <button id="send">Post</button>
-  <div>
-    <label for="player_name">Name</label>
-    <input type="text" id="player_name">
+<template name="chat">
+  <div class="message">
+    <ul class="message-list">
+      {{#each messages}}
+        {{> message}}
+      {{/each}}
+    </ul>
+    <textarea id="message"></textarea>
+    <button id="send">Post</button>
+    <div>
+      <label for="player_name">Name</label>
+      <input type="text" id="player_name">
+    </div>
   </div>
-</div>
+</template>

@@ -1,9 +1,9 @@
-Template.body.helpers({
+Template.chat.helpers({
   messages: function () {
     return Messages.find({}, { sort: { created_at: -1 }, limit: 20 } ).fetch().reverse();
   }
 });
-Template.body.events ({
+Template.chat.events ({
   'click #send': function (e){
     var message = $("#message").val();
     if(message.length){
