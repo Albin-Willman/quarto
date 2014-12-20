@@ -3,29 +3,15 @@
 </head>
 
 <body>
-  <div>
-    {{> newGame}}
-    {{#if runnningGames.count }}
-      {{#each runnningGames}}
-        {{> game}}
-      {{/each}}
-    {{ else }}
-      {{#each lastGames}}
-        {{> game}}
-      {{/each}}
-    {{/if}}
-    <div class="message">
-      <ul class="message-list">
-        {{#each messages}}
-          {{> message}}
-        {{/each}}
-      </ul>
-      <textarea id="message"></textarea>
-      <button id="send">Post</button>
-      <div>
-        <label for="player_name">Name</label>
-        <input type="text" id="player_name">
-      </div>
-    </div>
-  </div>
+  {{> newGame}}
+  {{#if runnningGames.count }}
+    {{#each runnningGames}}
+      {{> game}}
+    {{/each}}
+  {{ else }}
+    {{#each lastGames}}
+      {{> game}}
+    {{/each}}
+  {{/if}}
+  {{> chat}}
 </body>
